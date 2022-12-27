@@ -12,33 +12,17 @@ const { handleSuccess, handleError } = require('./controllers/response.controlle
 const { isAuth } = require('./controllers/auth.controller')
 
 app.route('/events')
-    .get(
-        // isAuth,
-        all,
-        handleSuccess,
-        handleError
-    )
-    .post(
-        create,
-        handleSuccess,
-        handleError
-    );
+    .get(all)
+    .post(create)
 
 app.route('/events/:eventId')
-    .get(
-        get,
-        handleSuccess,
-        handleError
-    )
-    .put(
-        update,
-        handleSuccess,
-        handleError
-    )
-    .delete(
-        remove,
-        handleSuccess,
-        handleError
-    )
+    .get(get)
+    .put(update)
+    .delete(remove)
+
+app.use(
+    handleError,
+    handleSuccess
+)
 
 app.listen(process.env.PORT || 5000)
