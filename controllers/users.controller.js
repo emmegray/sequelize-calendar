@@ -9,12 +9,21 @@ async function get(req, res, next) {
     req.error = error
   }
   next()
-
 }
 
-User.hasMany(Event, {
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
-});
+async function getEvents(req, res, next) {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    const events = await Event.findAll({
+      where: {
+        UserId: user.id
+      }
+    })
+    req.success = events
+  } catch (error) {
+    req.error = error
+  }
+  next()
+}
 
-module.exports = { get };
+module.exports = { get, getEvents };

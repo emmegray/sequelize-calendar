@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../db');
-const User = require('./User');
 
 const Event = sequelize.define('Event', {
   id: {
@@ -21,7 +20,5 @@ const Event = sequelize.define('Event', {
     allowNull: false
   }
 })
-
-Event.belongsTo(User);
 
 module.exports = Event;
